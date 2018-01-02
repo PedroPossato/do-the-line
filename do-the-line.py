@@ -31,43 +31,49 @@ def check(vetor,pontos,num):
                         vetor[k] = 0
                 pontos[0] += 5*(vetor[num]-1)
 
-vetor = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-pontos = [0]
-
-print "POSICOES DE 1 a 20:"
-print "Forme linhas de numeros iguais para pontuar! Vale vertical e horizontal :)\n"
-
-desenha(vetor)
-
 while True:
-    needed = True
-    maior = 5
-    for j in range(20):
-        if maior < vetor[j]:
-            maior = vetor[j]
-    rng = randint(1,maior)
-    print "\n",rng,"eh seu numero nesse turno.\nEm qual posicao quer coloca-lo?"
-    while needed:
-        formato = False
-        num = raw_input()
-        try:
-            num = (int)(num)
-            num -= 1
-        except:
-            print "Formato invalido."
-            formato = True
-        if not formato:
-            try:
-                if vetor[num] == 0 and num >= 0:
-                    needed = False
-                else:
-                    print "Numero invalido."
-            except:
-                print "Numero invalido."
-    vetor[num] = rng
-    check(vetor,pontos,num)
+    vetor = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    pontos = [0]
+
+    print "POSICOES DE 1 a 20:"
+    print "Forme linhas de numeros iguais para pontuar! Vale vertical e horizontal :)\n"
+
     desenha(vetor)
-    if 0 not in vetor:
-        print "Game over"
-        print "Pontuacao: {}".format(pontos[0])
+
+    while True:
+        needed = True
+        maior = 5
+        for j in range(20):
+            if maior < vetor[j]:
+                maior = vetor[j]
+        rng = randint(1,maior)
+        print "\n",rng,"eh seu numero nesse turno.\nEm qual posicao quer coloca-lo?"
+        while needed:
+            formato = False
+            num = raw_input()
+            try:
+                num = (int)(num)
+                num -= 1
+            except:
+                print "Formato invalido."
+                formato = True
+            if not formato:
+                try:
+                    if vetor[num] == 0 and num >= 0:
+                        needed = False
+                    else:
+                        print "Numero invalido."
+                except:
+                    print "Numero invalido."
+        vetor[num] = rng
+        check(vetor,pontos,num)
+        desenha(vetor)
+        if 0 not in vetor:
+            print "Game over"
+            print "Pontuacao: {}".format(pontos[0])
+            break
+
+    print "Quer continuar jogando? (s/n)\n"
+    resposta = raw_input()
+    if resposta[0] == 'n':
         break
